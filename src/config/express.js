@@ -3,6 +3,7 @@ const express = require('express'),
       cors = require('./cors'),
       auth = require('../routes/auth');
       image = require('../routes/image');
+      system = require('../routes/system');
       user = require('../routes/user');
       app = express();
 
@@ -20,6 +21,7 @@ app.disable('x-powered-by');
 // Routes
 auth(app);
 image(app);
+system(app);
 user(app);
 
 module.exports = app;

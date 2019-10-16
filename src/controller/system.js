@@ -1,13 +1,13 @@
 const logger = require("../config/log")
-     ,imageModel = require("../model/image.model");
+     ,systemModel = require("../model/system.model");
 
 module.exports.append = async (req, res) => {
     try {
         logger.info('Request Name:' + req.body.name + ' Description ' + req.body.description);
-        const image = await imageModel.append(req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash);
+        const system = await systemModel.append(req.body.name, req.body.description);
 
-        if (image) {
-            return res.status(200).send({ 'image' : image });
+        if (system) {
+            return res.status(200).send({ 'system' : system });
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -18,10 +18,10 @@ module.exports.append = async (req, res) => {
 
 module.exports.remove = async (req, res) => {
     try {
-        const image = await imageModel.remove(req.body.id);
+        const system = await systemModel.remove(req.body.id);
 
-        if (image) {
-            return res.status(200).send({ 'image' : image });
+        if (system) {
+            return res.status(200).send({ 'system' : system });
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -32,10 +32,10 @@ module.exports.remove = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
-        const image = await imageModel.update(req.body.id, req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash);
+        const system = await systemModel.update(req.body.id, req.body.name, req.body.description);
 
-        if (image) {
-            return res.status(200).send({ 'image' : image });
+        if (system) {
+            return res.status(200).send({ 'system' : system });
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -46,10 +46,10 @@ module.exports.update = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
     try {
-        const images = await imageModel.getAll();
+        const systems = await systemModel.getAll();
 
-        if (images) {
-            return res.status(200).send({ 'images' : images });
+        if (systems) {
+            return res.status(200).send({ 'systems' : systems });
         } else {
             res.status(400).send({ error: "Error no banco"});
         }

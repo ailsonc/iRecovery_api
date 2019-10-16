@@ -4,7 +4,7 @@ const logger = require("../config/log")
 module.exports.append = async (req, res) => {
     try {
         logger.info('Request Name:' + req.body.name + ' Description ' + req.body.description);
-        const image = await imageModel.append(req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash);
+        const image = await imageModel.append(req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash, req.body.idsystem);
 
         if (image) {
             return res.status(200).send({ 'image' : image });
@@ -32,7 +32,7 @@ module.exports.remove = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
-        const image = await imageModel.update(req.body.id, req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash);
+        const image = await imageModel.update(req.body.id, req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash, req.body.idsystem);
 
         if (image) {
             return res.status(200).send({ 'image' : image });

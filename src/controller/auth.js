@@ -17,8 +17,10 @@ module.exports.authentication = async (req, res) => {
     try {
         const user = await userModel.getUser(req.body.email);
 
+        logger.info(await crypt.encrypt(req.body.password));
+
         if (user && await crypt.compare(req.body.password, user.password)) {
-            return res.status(200).send({ 'x-access-token' : signUserToken(user) });       
+            return res.status(200).send({ 'token' : signUserToken(user) });       
         } else {
           res.status(400).send({ messege: "Invalid Authentication"});
         }
@@ -30,7 +32,7 @@ module.exports.authentication = async (req, res) => {
 
 module.exports.requireAuthentication = function(req, res, next) {
     try {
-        var token = req.header('x-access-token'); 
+        var token = req.header('Authentication'); 
 
         if(token) {
             logger.debug('Request ' + req.method + ' to ' + req.baseUrl);

@@ -6,5 +6,8 @@ module.exports  = function(app) {
        .post(image.append)
        .delete(image.remove)  
        .put(image.update); 
+
+    app.route('/api/image')
+       .get(image.getAll);
       
 };

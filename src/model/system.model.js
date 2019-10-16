@@ -2,7 +2,7 @@ var db = require('../config/db');
 
 module.exports.getAll = async () => {
     try {
-        const { rows } = await db.query('SELECT ID, NAME, DESCRIPTION FROM F_SYSTEM');
+        const { rows } = await db.query('SELECT ID, NAME, DESCRIPTION FROM F_SYSTEM ORDER BY ID');
         return rows;
     } catch(error) {
         throw error;

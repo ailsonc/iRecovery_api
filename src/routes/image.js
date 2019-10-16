@@ -3,6 +3,8 @@ module.exports  = function(app) {
 
     app.route('/api/v1/image')
        .get(image.getAll)
-       .post(image.create);   
+       .post(image.append)
+       .delete(image.remove)  
+       .put(image.update); 
       
 };

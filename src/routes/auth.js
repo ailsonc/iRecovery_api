@@ -5,7 +5,7 @@ module.exports  = function(app) {
     app.route('/api')
        .get((req, res) => { res.send('iRecovery version 1'); });
 
-    app.route('/api/v1/authentication')  
+    app.route('/api/v1/login')  
        .post(auth.authentication); 
 
     app.use('/api/v1/*', auth.requireAuthentication); 

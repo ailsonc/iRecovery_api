@@ -15,9 +15,7 @@ const signUserToken = user =>
 
 module.exports.authentication = async (req, res) => {
     try {
-        const user = await userModel.getUser(req.body.email);
-
-        logger.info(await crypt.encrypt(req.body.password));
+        const user = await userModel.getUser(req.body.username);
 
         if (user && await crypt.compare(req.body.password, user.password)) {
             return res.status(200).send({ 'token' : signUserToken(user) });       

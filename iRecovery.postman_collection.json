@@ -312,7 +312,7 @@
 			"response": []
 		},
 		{
-			"name": "user - authentication",
+			"name": "user - login",
 			"event": [
 				{
 					"listen": "test",
@@ -339,7 +339,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"admin@admin.com\",\r\n    \"password\" : \"admin\"\r\n}",
+					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"admin\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -347,7 +347,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/authentication",
+					"raw": "http://localhost:5000/api/v1/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -356,7 +356,7 @@
 					"path": [
 						"api",
 						"v1",
-						"authentication"
+						"login"
 					]
 				}
 			},
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"Notebook 1\",\r\n    \"email\" : \"admin@admin.com.br\",\r\n    \"password\" : \"1\"\r\n}",
+					"raw": "{\r\n    \"username\" : \"Notebook 2\",\r\n    \"password\" : \"1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -450,7 +450,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1\r\n}",
+					"raw": "{\r\n    \"id\" : 6\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -492,7 +492,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n    \"id\": 18,\r\n    \"username\": \"Notebook23ff\",\r\n    \"email\": \"Notebook X32\",\r\n    \"password\": \"1\"\r\n}",
+					"raw": " {\r\n    \"id\": 6,\r\n    \"username\": \"Notebook23ff\",\r\n    \"password\": \"1\",\r\n    \"status\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

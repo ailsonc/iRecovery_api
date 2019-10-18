@@ -1,10 +1,14 @@
 const logger = require("../config/log")
+     ,crypt = require("../utils/crypt")
      ,userModel = require("../model/user.model");
 
 module.exports.append = async (req, res) => {
     try {
         logger.info('Request Name:' + req.body.username);
-        const user = await userModel.append(req.body.username, req.body.email, req.body.password);
+
+        const cryptPassword = await crypt.encrypt(req.body.password);
+
+        const user = await userModel.append(req.body.username, cryptPassword);
 
         if (user) {
             return res.status(200).send({ 'user' : user });
@@ -32,7 +36,9 @@ module.exports.remove = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
-        const user = await userModel.update(req.body.id, req.body.username, req.body.email, req.body.password);
+        const cryptPassword = await crypt.encrypt(req.body.password);
+        
+        const user = await userModel.update(req.body.id, req.body.username, cryptPassword, req.body.status);
 
         if (user) {
             return res.status(200).send({ 'user' : user });

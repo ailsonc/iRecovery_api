@@ -16,11 +16,12 @@ const signUserToken = user =>
 module.exports.authentication = async (req, res) => {
     try {
         const user = await userModel.getUser(req.body.username);
+        logger.info('authentication: '+ req.body.username);
 
         if (user && await crypt.compare(req.body.password, user.password)) {
             return res.status(200).send({ 'token' : signUserToken(user) });       
         } else {
-          res.status(400).send({ messege: "Invalid Authentication"});
+          res.status(403).send({ messege: "Username or password is incorrect"});
         }
             
     } catch(error) {

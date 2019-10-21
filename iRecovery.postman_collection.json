@@ -228,6 +228,34 @@
 			"response": []
 		},
 		{
+			"name": "system - getById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authentication",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/system/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"system",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "system - update",
 			"request": {
 				"method": "PUT",
@@ -246,7 +274,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n    \"id\": 2,\r\n    \"name\": \"Notebook\",\r\n    \"description\": \"Notebook X\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Notebook\",\r\n    \"description\": \"Notebook X\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -254,7 +282,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/system",
+					"raw": "http://localhost:5000/api/v1/system/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -263,7 +291,8 @@
 					"path": [
 						"api",
 						"v1",
-						"system"
+						"system",
+						"4"
 					]
 				}
 			},
@@ -286,17 +315,8 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/system",
+					"raw": "http://localhost:5000/api/v1/system/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -305,7 +325,8 @@
 					"path": [
 						"api",
 						"v1",
-						"system"
+						"system",
+						"4"
 					]
 				}
 			},

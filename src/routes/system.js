@@ -3,8 +3,10 @@ module.exports  = function(app) {
 
     app.route('/api/v1/system')
        .get(system.getAll)
-       .post(system.append)
-       .delete(system.remove)  
-       .put(system.update); 
+       .post(system.append);   
       
+    app.route('/api/v1/system/:id')
+       .get(system.getById)
+       .put(system.update)
+       .delete(system.remove);
 };

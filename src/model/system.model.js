@@ -9,10 +9,20 @@ module.exports.getAll = async () => {
     }
 }
 
+module.exports.getById = async (id) => {
+    try {
+        console.log(id)
+        const { rows } = await db.query('SELECT ID, NAME, DESCRIPTION FROM F_SYSTEM WHERE ID = $1', [id]);
+        return rows[0];
+    } catch(error) {
+        throw error;
+    }
+}
+
 module.exports.append = async (name, description) => {
     try {
         const { rows } = await db.query('INSERT INTO F_SYSTEM(NAME, DESCRIPTION) VALUES($1, $2) RETURNING *', [name, description]);
-        return rows;
+        return rows[0];
     } catch(error) {
         throw error;
     }

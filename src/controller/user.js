@@ -54,8 +54,8 @@ module.exports.getAll = async (req, res) => {
     try {
         const users = await userModel.getAll();
 
-        if (user) {
-            return res.status(200).send({ 'users' : users });
+        if (users) {
+            return res.status(200).send(users);
         } else {
             res.status(400).send({ error: "Error no banco"});
         }

@@ -24,7 +24,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Notebook 1\",\r\n    \"description\" : \"Notebook X\",\r\n    \"filename\" : \"1\",\r\n    \"filepath\" : \"1\",\r\n    \"filehash\" : \"1\",\r\n    \"idsystem\" : 4\r\n}",
+					"raw": "{\r\n    \"name\" : \"Notebook 2\",\r\n    \"description\" : \"Notebook X\",\r\n    \"filename\" : \"1\",\r\n    \"filepath\" : \"1\",\r\n    \"filehash\" : \"1\",\r\n    \"idsystem\" : 4\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -93,7 +93,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 2\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +101,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/image",
+					"raw": "http://localhost:5000/api/v1/image/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -110,7 +110,8 @@
 					"path": [
 						"api",
 						"v1",
-						"image"
+						"image",
+						"2"
 					]
 				}
 			},

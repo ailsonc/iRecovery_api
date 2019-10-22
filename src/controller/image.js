@@ -3,11 +3,11 @@ const logger = require("../config/log")
 
 module.exports.append = async (req, res) => {
     try {
-        logger.info('Request Name:' + req.body.name + ' Description ' + req.body.description);
+        logger.info('Request Name:' + req.body.name + ' Description: ' + req.body.description + ' Idsystem: ' + req.body.idsystem);
         const image = await imageModel.append(req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash, req.body.idsystem);
 
         if (image) {
-            return res.status(200).send({ 'image' : image });
+            return res.status(200).send(image);
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -18,10 +18,11 @@ module.exports.append = async (req, res) => {
 
 module.exports.remove = async (req, res) => {
     try {
-        const image = await imageModel.remove(req.body.id);
+        const { id } = req.params
+        const image = await imageModel.remove(id);
 
         if (image) {
-            return res.status(200).send({ 'image' : image });
+            return res.status(200).send(image);
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -32,10 +33,11 @@ module.exports.remove = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
-        const image = await imageModel.update(req.body.id, req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash, req.body.idsystem);
+        const { id } = req.params
+        const image = await imageModel.update(id, req.body.name, req.body.description, req.body.filename, req.body.filepath, req.body.filehash, req.body.idsystem);
 
         if (image) {
-            return res.status(200).send({ 'image' : image });
+            return res.status(200).send(image);
         } else {
             res.status(400).send({ error: "Error no banco"});
         }  
@@ -49,7 +51,22 @@ module.exports.getAll = async (req, res) => {
         const images = await imageModel.getAll();
 
         if (images) {
-            return res.status(200).send({ 'images' : images });
+            return res.status(200).send(images);
+        } else {
+            res.status(400).send({ error: "Error no banco"});
+        }
+    } catch(error) {
+        return res.status(400).send(error);
+    }
+}
+
+module.exports.getById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const image = await imageModel.getById(id);
+
+        if (image) {
+            return res.status(200).send(image);
         } else {
             res.status(400).send({ error: "Error no banco"});
         }

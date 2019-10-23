@@ -11,7 +11,6 @@ module.exports.getAll = async () => {
 
 module.exports.getById = async (id) => {
     try {
-        console.log(id)
         const { rows } = await db.query('SELECT ID, NAME, DESCRIPTION FROM F_SYSTEM WHERE ID = $1', [id]);
         return rows[0];
     } catch(error) {

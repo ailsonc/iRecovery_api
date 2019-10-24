@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 app.use(cors);
 
 // JAVA JNLP
-app.use('/', express.static('public'));
+app.use('/jnlp', express.static('jnlp'));
+app.use('/', express.static('admin'));
 
 // Disable x-powered-by from header
 app.disable('x-powered-by');

@@ -4,6 +4,7 @@ const express = require('express'),
       auth = require('../routes/auth');
       image = require('../routes/image');
       system = require('../routes/system');
+      upload = require('../routes/upload');
       user = require('../routes/user');
       app = express();
 
@@ -23,6 +24,7 @@ app.disable('x-powered-by');
 auth(app);
 image(app);
 system(app);
+upload(app);
 user(app);
 
 module.exports = app;

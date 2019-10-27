@@ -1,10 +1,17 @@
 const logger = require("../config/log")
+     ,fs = require('fs')
      ,imageModel = require("../model/image.model");
 
 module.exports.append = async (req, res) => {''
     try {
-        logger.info('Request Name:' + req.file.originalname + ' Description: ' + req.body.description + ' Idsystem: ' + req.body.idsystem);
-        const image = await imageModel.append(req.body.name, req.body.description, req.file.originalname, req.file.path, req.file.path, req.body.idsystem);
+        logger.info('Request Name:' + req.file.originalname + 
+                    ' Description: ' + req.body.description + 
+                    ' filename: ' + req.file.originalname + 
+                    ' filepath: ' + req.file.path + 
+                    ' filesize: ' + req.file.size + 
+                    ' Idsystem: ' + req.body.idsystem);
+        
+        const image = await imageModel.append(req.body.name, req.body.description, req.file.originalname, req.file.path, req.file.size, req.body.idsystem);
 
         if (image) {
             return res.status(200).send(image);
@@ -20,8 +27,8 @@ module.exports.remove = async (req, res) => {
     try {
         const { id } = req.params
         const image = await imageModel.remove(id);
-
         if (image) {
+            await fs.unlinkSync(image.filepath);
             return res.status(200).send(image);
         } else {
             res.status(400).send({ error: "Error no banco"});
@@ -34,7 +41,7 @@ module.exports.remove = async (req, res) => {
 module.exports.update = async (req, res) => {
     try {
         const { id } = req.params
-        const image = await imageModel.update(id, req.body.name, req.body.description, req.file.originalname, req.file.path, req.file.path, req.body.idsystem);
+        const image = await imageModel.update(id, req.body.name, req.body.description, req.body.idsystem);
 
         if (image) {
             return res.status(200).send(image);

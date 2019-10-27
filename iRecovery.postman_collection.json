@@ -6,16 +6,36 @@
 	},
 	"item": [
 		{
+			"name": "image_app - getAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authentication",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "image - append",
 			"request": {
 				"method": "POST",
 				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
 					{
 						"key": "Authentication",
 						"value": "{{token}}",
@@ -23,13 +43,29 @@
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Notebook 3\",\r\n    \"description\" : \"Notebook X\",\r\n    \"filename\" : \"1\",\r\n    \"filepath\" : \"1\",\r\n    \"filehash\" : \"1\",\r\n    \"idsystem\" : 13\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test1",
+							"type": "text"
+						},
+						{
+							"key": "profile",
+							"type": "file",
+							"src": "/C:/Users/ailso/Downloads/httpclient-4.2.3.jar.zip"
+						},
+						{
+							"key": "idsystem",
+							"value": "14",
+							"type": "text"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/v1/image",
@@ -135,29 +171,8 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "test",
-							"type": "text"
-						},
-						{
-							"key": "description",
-							"value": "test",
-							"type": "text"
-						},
-						{
-							"key": "profile",
-							"type": "file",
-							"src": "/C:/Users/ailso/Downloads/angular-8-registration-login-example-master.zip"
-						},
-						{
-							"key": "idsystem",
-							"value": "14",
-							"type": "text"
-						}
-					],
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"test\",\r\n    \"description\": \"test1\",\r\n    \"idsystem\": 14\r\n }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -165,7 +180,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/image/24",
+					"raw": "http://localhost:5000/api/v1/image/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -175,7 +190,7 @@
 						"api",
 						"v1",
 						"image",
-						"24"
+						"1"
 					]
 				}
 			},
@@ -575,58 +590,6 @@
 						"v1",
 						"user",
 						"133"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "image - append",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authentication",
-						"value": "{{token}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "test",
-							"type": "text"
-						},
-						{
-							"key": "description",
-							"value": "test1",
-							"type": "text"
-						},
-						{
-							"key": "profile",
-							"type": "file",
-							"src": "/C:/Users/ailso/Downloads/httpclient-4.2.3.jar.zip"
-						},
-						{
-							"key": "idsystem",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/v1/image",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"v1",
-						"image"
 					]
 				}
 			},

@@ -30,7 +30,7 @@ module.exports.getUser = async (username) => {
 module.exports.remove = async (id) => {
     try {
         const { rows } = await db.query('DELETE FROM F_USER WHERE ID = $1 RETURNING *', [id]);
-        return rows;
+        return rows[0];
     } catch(error) {
         throw error;
     }

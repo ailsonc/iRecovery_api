@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(cors);
 
 // Statics
+app.use('/', express.static('admin'));
 app.use('/jnlp', express.static('jnlp'));
 app.use('/uploads', express.static('uploads'));
-app.use('/', express.static('admin'));
 
 // Disable x-powered-by from header
 app.disable('x-powered-by');

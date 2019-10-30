@@ -9,7 +9,7 @@
 + admin   - Angular
 + jnlp    - Java
 + uploads - Arquivos
-+ src - Arquivos
++ src     - Serviços
     + config
        + cors
        + db

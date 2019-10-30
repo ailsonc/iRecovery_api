@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-bread-crumb [itens]=\"[{text:'Imagens', link:'/images'}, {text:pageTitle} ]\"></app-bread-crumb>\r\n\r\n<app-page-header [page-title]=\"pageTitle\" button-link=\"/images\" button-class=\"btn-light\" button-text=\"<< Voltar\"></app-page-header>\r\n\r\n<form [formGroup]=\"resourceForm\" (submit)=\"submitForm()\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\">\r\n      Informações sobre a Imagem\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"form-row\">\r\n        <!-- name -->\r\n        <div class=\"form-group col-md-6\">\r\n          <label for=\"name\">Nome</label>\r\n          <input type=\"text\" class=\"form-control\" id=\"name\" formControlName=\"name\">\r\n          <app-form-field-error [form-control]=\"resourceForm.get('name')\"></app-form-field-error>\r\n        </div>\r\n        <!-- file -->\r\n        <div class=\"form-group col-md-6\">\r\n          <label for=\"profile\">ISO</label>\r\n          <input type=\"file\" class=\"form-control-file\" id=\"profile\" (change)=\"onSelectedFile($event.target.files)\">\r\n          <app-form-field-error [form-control]=\"resourceForm.get('profile')\"></app-form-field-error>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-row\">\r\n        <!-- description -->\r\n        <div class=\"form-group col-md-7\">\r\n          <label for=\"description\">Descrição</label>\r\n          <input type=\"text\" class=\"form-control\" id=\"description\" formControlName=\"description\">\r\n        </div>\r\n        <!-- systemId -->\r\n        <div class=\"form-group col-md-4\">\r\n          <label for=\"idsystem\">Sistema Operacional</label>\r\n          <select name=\"idsystem\" id=\"idsystem\" class=\"form-control\" formControlName=\"idsystem\">\r\n            <option *ngFor=\"let system of systems\" [value]=\"system.id\">{{system.name}}</option>\r\n          </select>\r\n          <app-form-field-error [form-control]=\"resourceForm.get('idsystem')\"></app-form-field-error>\r\n        </div>\r\n      </div>\r\n      <!--progress-->\r\n      <div *ngIf=\"fileUpload.status!=='progress'\">\r\n        <div class=\"progress\" style=\"height: 20px;margin-bottom:20px;\">\r\n          <div class=\"progress-bar\" role=\"progressbar\" [style.width.%]=\"fileUpload.message\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">{{fileUpload.message}}%</div>\r\n        </div>\r\n      </div>\r\n      <!--message-->\r\n      <app-file-upload-error-message [file-upload]=\"fileUpload\"></app-file-upload-error-message>\r\n    </div>\r\n  </div>\r\n  <app-server-error-messages [server-error-messages]=\"serverErrorMessages\"></app-server-error-messages>\r\n  <button [disabled]=\"submittingForm || resourceForm.invalid\" type=\"submit\" class=\"btn btn-primary btn-lg float-right mt-3\">Salvar</button>\r\n</form>\r\n\r\n<pre>{{resourceForm.value | json }}</pre>\r\n"
+module.exports = "<app-bread-crumb [itens]=\"[{text:'Imagens', link:'/images'}, {text:pageTitle} ]\"></app-bread-crumb>\n\n<app-page-header [page-title]=\"pageTitle\" button-link=\"/images\" button-class=\"btn-light\" button-text=\"<< Voltar\">\n</app-page-header>\n\n<form [formGroup]=\"resourceForm\" (ngSubmit)=\"submitForm()\">\n  <div class=\"card\">\n    <div class=\"card-header\">\n      Informações sobre a Imagem\n    </div>\n    <div class=\"card-body\">\n      <div class=\"form-row\">\n        <!-- name -->\n        <div class=\"form-group col-md-6\">\n          <label for=\"name\">Nome</label>\n          <input type=\"text\" class=\"form-control\" id=\"name\" formControlName=\"name\">\n          <app-form-field-error [form-control]=\"resourceForm.get('name')\"></app-form-field-error>\n        </div>\n        <!-- description -->\n        <div class=\"form-group col-md-6\">\n          <label for=\"description\">Descrição</label>\n          <input type=\"text\" class=\"form-control\" id=\"description\" formControlName=\"description\">\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <!-- systemId -->\n        <div class=\"form-group col-md-6\">\n          <label for=\"idsystem\">Sistema Operacional</label>\n          <select name=\"idsystem\" id=\"idsystem\" class=\"form-control\" formControlName=\"idsystem\">\n            <option *ngFor=\"let system of systems\" [value]=\"system.id\">{{system.name}}</option>\n          </select>\n          <app-form-field-error [form-control]=\"resourceForm.get('idsystem')\"></app-form-field-error>\n        </div>\n        <!-- file -->\n        <div class=\"form-group col-md-6\" *ngIf=\"currentAction == 'new'\">\n          <label for=\"profile\">Arquivo</label>\n          <input type=\"file\" class=\"form-control-file\" id=\"profile\" (change)=\"onSelectedFile($event)\">\n          <app-form-field-error [form-control]=\"resourceForm.get('profile')\"></app-form-field-error>\n        </div>\n      </div>\n      <div class=\"form-row\">\n        <div class=\"form-group col-md-12\">\n          <div *ngIf=\"fileUpload.status==='progress'\">\n            <div class=\"progress\" style=\"height: 20px;margin-bottom:20px;\">\n              <div class=\"progress-bar\" role=\"progressbar\" [style.width.%]=\"fileUpload.message\" aria-valuenow=\"25\"\n                aria-valuemin=\"0\" aria-valuemax=\"100\">{{fileUpload.message}}%</div>\n            </div>\n          </div>\n        </div>\n      </div>\n      <button [disabled]=\"submittingForm || resourceForm.invalid\" type=\"submit\"\n        class=\"btn btn-primary btn-lg float-right mt-3\">Salvar</button>\n    </div>\n  </div>\n</form>\n<div *ngIf=\"fileUpload.status==='error'\">\n  <div [innerHTML]=\"fileUpload.message\"></div>\n</div>\n<div *ngIf=\"fileUpload.status==='success'\">\n  <img [src]=\"fileUpload.filePath\" height=\"200px\" />\n</div>"
 
 /***/ }),
 
@@ -35,10 +35,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _shared_components_base_resource_form_base_resource_form_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/components/base-resource-form/base-resource-form.component */ "./src/app/shared/components/base-resource-form/base-resource-form.component.ts");
-/* harmony import */ var _models_image_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/image.model */ "./src/app/pages/images/models/image.model.ts");
-/* harmony import */ var _service_image_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../service/image.service */ "./src/app/pages/images/service/image.service.ts");
-/* harmony import */ var _systems_service_system_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../systems/service/system.service */ "./src/app/pages/systems/service/system.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _models_image_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../models/image.model */ "./src/app/pages/images/models/image.model.ts");
+/* harmony import */ var _service_image_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../service/image.service */ "./src/app/pages/images/service/image.service.ts");
+/* harmony import */ var _systems_service_system_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../systems/service/system.service */ "./src/app/pages/systems/service/system.service.ts");
 
 
 
@@ -46,22 +49,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ImageFormComponent = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ImageFormComponent, _super);
-    function ImageFormComponent(imageService, systemService, injector) {
-        var _this = _super.call(this, new _models_image_model__WEBPACK_IMPORTED_MODULE_4__["Image"], injector, imageService, _models_image_model__WEBPACK_IMPORTED_MODULE_4__["Image"].fromJson) || this;
-        _this.imageService = imageService;
-        _this.systemService = systemService;
-        _this.injector = injector;
-        _this.fileUpload = { status: 'error', message: 'Teste', filePath: '' };
-        _this.resource = new _models_image_model__WEBPACK_IMPORTED_MODULE_4__["Image"]();
-        return _this;
+
+
+
+var ImageFormComponent = /** @class */ (function () {
+    function ImageFormComponent(formBuilder, route, router, imageService, systemService) {
+        this.formBuilder = formBuilder;
+        this.route = route;
+        this.router = router;
+        this.imageService = imageService;
+        this.systemService = systemService;
+        this.image = new _models_image_model__WEBPACK_IMPORTED_MODULE_6__["Image"]();
+        this.submittingForm = false;
+        this.fileUpload = { status: '', message: '', filePath: '' };
     }
     ImageFormComponent.prototype.ngOnInit = function () {
-        _super.prototype.ngOnInit.call(this);
+        this.setCurrentAction();
+        this.loadImage();
         this.loadSystems();
     };
-    ImageFormComponent.prototype.buildResourceForm = function () {
+    ImageFormComponent.prototype.ngAfterContentChecked = function () {
+        this.setPageTitle();
+    };
+    ImageFormComponent.prototype.onSelectedFile = function (event) {
+        if (event.target.files.length > 0) {
+            var file = event.target.files[0];
+            this.resourceForm.get('profile').setValue(file);
+        }
+    };
+    ImageFormComponent.prototype.submitForm = function () {
+        this.submittingForm = true;
+        if (this.currentAction === 'new') {
+            this.createImage();
+        }
+        else {
+            this.updateImage();
+        }
+    };
+    // Private Methods
+    ImageFormComponent.prototype.setCurrentAction = function () {
+        if (this.route.snapshot.url[0].path === 'new') {
+            this.currentAction = 'new';
+            this.newBuildResourceForm();
+        }
+        else {
+            this.currentAction = 'edit';
+            this.editBuildResourceForm();
+        }
+    };
+    ImageFormComponent.prototype.newBuildResourceForm = function () {
         this.resourceForm = this.formBuilder.group({
             id: [null],
             name: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(2)]],
@@ -70,47 +106,73 @@ var ImageFormComponent = /** @class */ (function (_super) {
             idsystem: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]]
         });
     };
+    ImageFormComponent.prototype.editBuildResourceForm = function () {
+        this.resourceForm = this.formBuilder.group({
+            id: [null],
+            name: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(2)]],
+            description: [null],
+            idsystem: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]]
+        });
+    };
+    ImageFormComponent.prototype.loadImage = function () {
+        var _this = this;
+        if (this.currentAction === 'edit') {
+            this.route.paramMap.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (params) { return _this.imageService.getById(+params.get('id')); })).subscribe(function (image) {
+                _this.image = image;
+                _this.resourceForm.patchValue(image); // binds loader entry data to resourceForm
+            }, function (error) {
+                alert('ocorreu um erro no servidor, tente mas tarde.');
+            });
+        }
+    };
+    ImageFormComponent.prototype.setPageTitle = function () {
+        if (this.currentAction === 'new') {
+            this.pageTitle = 'Cadastrar';
+        }
+        else {
+            var imageName = this.image.name || '';
+            this.pageTitle = 'Editar: ' + imageName;
+        }
+    };
     ImageFormComponent.prototype.loadSystems = function () {
         var _this = this;
         this.systemService.getAll().subscribe(function (systems) { return _this.systems = systems; });
     };
-    ImageFormComponent.prototype.editionPageTitle = function () {
-        var resourceName = this.resource.name || '';
-        return 'Editar: ' + resourceName;
+    ImageFormComponent.prototype.createImage = function () {
+        var _this = this;
+        var formData = new FormData();
+        formData.append('name', this.resourceForm.get('name').value);
+        formData.append('description', this.resourceForm.get('description').value);
+        formData.append('profile', this.resourceForm.get('profile').value);
+        formData.append('idsystem', this.resourceForm.get('idsystem').value);
+        this.imageService.create(formData).subscribe(function (res) { return _this.actionsForSuccess(res); }, function (error) { return _this.actionsForError(error); });
     };
-    ImageFormComponent.prototype.onSelectedFile = function (files) {
-        if (files.length > 0) {
-            var file = files.item(0);
-            this.resourceForm.get('profile').setValue(file);
+    ImageFormComponent.prototype.updateImage = function () {
+        var _this = this;
+        var image = Object.assign(new _models_image_model__WEBPACK_IMPORTED_MODULE_6__["Image"](), this.resourceForm.value);
+        this.imageService.update(image)
+            .subscribe(function (data) { return _this.actionsForSuccess(data); }, function (error) { return _this.actionsForError(error); });
+    };
+    ImageFormComponent.prototype.actionsForSuccess = function (res) {
+        var _this = this;
+        this.fileUpload = res;
+        console.log(res);
+        if (res.id) {
+            toastr__WEBPACK_IMPORTED_MODULE_5___default.a.success('Solicitação processada com sucesso!');
+            this.submittingForm = false;
+            this.router.navigateByUrl('images', { skipLocationChange: true }).then(function () { return _this.router.navigate(['images', res.id, 'edit']); });
         }
-        ;
     };
-    ImageFormComponent.prototype.createResource = function () {
-        var _this = this;
-        this.setResouce();
-        // Criando um Resource nova e atribuindo os valores de resourceForm a constante.
-        this.resourceService.create(this.jsonDataToResourceFn(this.resource))
-            .subscribe(function (resource) { return _this.actionsForSuccess(resource); }, function (error) { return _this.actionsForError(error); });
-    };
-    ImageFormComponent.prototype.updateResource = function () {
-        var _this = this;
-        this.setResouce();
-        // Criando um Resource nova e atribuindo os valores de resourceForm a constante.
-        this.resourceService.update(this.jsonDataToResourceFn(this.resource))
-            .subscribe(function (resource) { return _this.actionsForSuccess(resource); }, function (error) { return _this.actionsForError(error); });
-    };
-    ImageFormComponent.prototype.setResouce = function () {
-        /*
-          const formData = new FormData();
-          formData.append('profile', this.resourceForm.get('profile').value);
-          */
-        var profile = this.resourceForm.get('profile').value;
-        this.resource.name = this.resourceForm.get('name').value;
-        this.resource.description = this.resourceForm.get('description').value;
-        this.resource.filename = profile.name;
-        this.resource.filepath = profile.name;
-        this.resource.filehash = profile.name;
-        this.resource.idsystem = this.resourceForm.get('idsystem').value;
+    ImageFormComponent.prototype.actionsForError = function (error) {
+        toastr__WEBPACK_IMPORTED_MODULE_5___default.a.error('Ocorreu um erro ao processada sua solicitação');
+        this.submittingForm = false;
+        if (error.status === 422) {
+            // this.serverErrorMessages = JSON.parse(error._body).erros;
+            //this.serverErrorMessages = ['Falha na comunicação com o servidor, Por favor, tente mais tarde.'];
+        }
+        else {
+            //this.serverErrorMessages = ['Falha na comunicação com o servidor, Por favor, tente mais tarde.'];
+        }
     };
     ImageFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -118,10 +180,10 @@ var ImageFormComponent = /** @class */ (function (_super) {
             template: __webpack_require__(/*! ./image-form.component.html */ "./src/app/pages/images/image-form/image-form.component.html"),
             styles: [__webpack_require__(/*! ./image-form.component.scss */ "./src/app/pages/images/image-form/image-form.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_service_image_service__WEBPACK_IMPORTED_MODULE_5__["ImageService"], _systems_service_system_service__WEBPACK_IMPORTED_MODULE_6__["SystemService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _service_image_service__WEBPACK_IMPORTED_MODULE_7__["ImageService"], _systems_service_system_service__WEBPACK_IMPORTED_MODULE_8__["SystemService"]])
     ], ImageFormComponent);
     return ImageFormComponent;
-}(_shared_components_base_resource_form_base_resource_form_component__WEBPACK_IMPORTED_MODULE_3__["BaseResourceFormComponent"]));
+}());
 
 
 
@@ -161,29 +223,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageListComponent", function() { return ImageListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _shared_components_base_resource_list_base_resource_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/components/base-resource-list/base-resource-list.component */ "./src/app/shared/components/base-resource-list/base-resource-list.component.ts");
-/* harmony import */ var _service_image_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/image.service */ "./src/app/pages/images/service/image.service.ts");
+/* harmony import */ var _service_image_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/image.service */ "./src/app/pages/images/service/image.service.ts");
 
 
 
-
-var ImageListComponent = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ImageListComponent, _super);
+var ImageListComponent = /** @class */ (function () {
     function ImageListComponent(imageService) {
-        var _this = _super.call(this, imageService) || this;
-        _this.imageService = imageService;
-        return _this;
+        this.imageService = imageService;
+        this.resources = [];
     }
+    ImageListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.imageService.getAll().subscribe(function (images) { return _this.resources = images.sort(function (a, b) { return b.id - a.id; }); }, function (error) { return alert('Erro ao carregar a lista'); });
+    };
+    ImageListComponent.prototype.deleteResource = function (resource) {
+        var _this = this;
+        var mustDelete = confirm('Deseja excluir esse item');
+        if (mustDelete) {
+            this.imageService.delete(resource.id).subscribe(function () { return _this.resources = _this.resources.filter(function (element) { return element !== resource; }); }, function () { return alert('Erro ao tentar excluir'); });
+        }
+    };
     ImageListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-image-list',
             template: __webpack_require__(/*! ./image-list.component.html */ "./src/app/pages/images/image-list/image-list.component.html"),
             styles: [__webpack_require__(/*! ./image-list.component.scss */ "./src/app/pages/images/image-list/image-list.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_service_image_service__WEBPACK_IMPORTED_MODULE_3__["ImageService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_service_image_service__WEBPACK_IMPORTED_MODULE_2__["ImageService"]])
     ], ImageListComponent);
     return ImageListComponent;
-}(_shared_components_base_resource_list_base_resource_list_component__WEBPACK_IMPORTED_MODULE_2__["BaseResourceListComponent"]));
+}());
 
 
 
@@ -305,14 +374,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var Image = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Image, _super);
-    function Image(id, name, description, filename, filepath, filehash, idsystem, system) {
+    function Image(id, name, description, originalname, filename, filesize, idsystem, system) {
         var _this = _super.call(this) || this;
         _this.id = id;
         _this.name = name;
         _this.description = description;
+        _this.originalname = originalname;
         _this.filename = filename;
-        _this.filepath = filepath;
-        _this.filehash = filehash;
+        _this.filesize = filesize;
         _this.idsystem = idsystem;
         _this.system = system;
         return _this;
@@ -339,11 +408,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageService", function() { return ImageService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/services/base-resource-service */ "./src/app/shared/services/base-resource-service.ts");
-/* harmony import */ var _models_image_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/image.model */ "./src/app/pages/images/models/image.model.ts");
-/* harmony import */ var _systems_service_system_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../systems/service/system.service */ "./src/app/pages/systems/service/system.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _models_image_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../models/image.model */ "./src/app/pages/images/models/image.model.ts");
+/* harmony import */ var _systems_service_system_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../systems/service/system.service */ "./src/app/pages/systems/service/system.service.ts");
 
 
 
@@ -351,34 +420,85 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ImageService = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ImageService, _super);
-    function ImageService(injector, systemService) {
-        var _this = _super.call(this, src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl + "/api/v1/image", injector, _models_image_model__WEBPACK_IMPORTED_MODULE_4__["Image"].fromJson) || this;
-        _this.injector = injector;
-        _this.systemService = systemService;
-        return _this;
+var ImageService = /** @class */ (function () {
+    function ImageService(http, systemService) {
+        this.http = http;
+        this.systemService = systemService;
+        this.apiPath = '/api/v1/image';
     }
-    ImageService.prototype.create = function (image) {
-        return this.setSystemAndSendToServer(image, _super.prototype.create.bind(this));
+    ImageService.prototype.getAll = function () {
+        return this.http.get(this.apiPath).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.jsonDataToEntries));
+    };
+    ImageService.prototype.getById = function (id) {
+        var url = this.apiPath + "/" + id;
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.jsonDataToEntry));
+    };
+    ImageService.prototype.delete = function (id) {
+        var url = this.apiPath + "/" + id;
+        return this.http.delete(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function () { return null; }));
+    };
+    ImageService.prototype.create = function (formData) {
+        var _this = this;
+        return this.http.post("" + this.apiPath, formData, {
+            reportProgress: true,
+            observe: 'events'
+        }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (event) { return _this.getEventMessage(event, formData); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
     };
     ImageService.prototype.update = function (image) {
-        return this.setSystemAndSendToServer(image, _super.prototype.update.bind(this));
-    };
-    ImageService.prototype.setSystemAndSendToServer = function (image, sendFn) {
-        return this.systemService.getById(image.idsystem).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["flatMap"])(function (system) {
+        var _this = this;
+        var url = this.apiPath + "/" + image.id;
+        return this.systemService.getById(image.idsystem).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["flatMap"])(function (system) {
             image.system = system;
-            return sendFn(image);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return _this.http.put(url, image).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(_this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function () { return image; }));
+        }));
+    };
+    ImageService.prototype.getEventMessage = function (event, formData) {
+        switch (event.type) {
+            case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].UploadProgress:
+                return this.fileUploadProgress(event);
+                break;
+            case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
+                return this.apiResponse(event);
+                break;
+            default:
+                return "File \"" + formData.get('profile').name + "\" surprising upload event: " + event.type + ".";
+        }
+    };
+    ImageService.prototype.fileUploadProgress = function (event) {
+        var percentDone = Math.round(100 * event.loaded / event.total);
+        return { status: 'progress', message: percentDone };
+    };
+    ImageService.prototype.apiResponse = function (event) {
+        return event.body;
+    };
+    ImageService.prototype.handleError = function (error) {
+        if (error.error instanceof ErrorEvent) {
+            console.error('An error occurred:', error.error.message);
+        }
+        else {
+            console.error("Backend returned code " + error.status + ", " + ("body was: " + error.error));
+        }
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error);
+    };
+    ImageService.prototype.jsonDataToEntries = function (jsonData) {
+        var images = [];
+        jsonData.forEach(function (element) {
+            var image = Object.assign(new _models_image_model__WEBPACK_IMPORTED_MODULE_5__["Image"](), element);
+            images.push(image);
+        });
+        return images;
+    };
+    ImageService.prototype.jsonDataToEntry = function (jsonData) {
+        return Object.assign(new _models_image_model__WEBPACK_IMPORTED_MODULE_5__["Image"](), jsonData);
     };
     ImageService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"], _systems_service_system_service__WEBPACK_IMPORTED_MODULE_5__["SystemService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _systems_service_system_service__WEBPACK_IMPORTED_MODULE_6__["SystemService"]])
     ], ImageService);
     return ImageService;
-}(_shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_3__["BaseResourceService"]));
+}());
 
 
 

@@ -46,10 +46,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/services/base-resource-service */ "./src/app/shared/services/base-resource-service.ts");
-/* harmony import */ var _models_user_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/user.model */ "./src/app/pages/users/models/user.model.ts");
-
+/* harmony import */ var _shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/services/base-resource-service */ "./src/app/shared/services/base-resource-service.ts");
+/* harmony import */ var _models_user_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/user.model */ "./src/app/pages/users/models/user.model.ts");
 
 
 
@@ -57,7 +55,7 @@ __webpack_require__.r(__webpack_exports__);
 var UserService = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](UserService, _super);
     function UserService(injector) {
-        var _this = _super.call(this, src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl + "/api/v1/user", injector, _models_user_model__WEBPACK_IMPORTED_MODULE_4__["User"].fromJson) || this;
+        var _this = _super.call(this, '/api/v1/user', injector, _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"].fromJson) || this;
         _this.injector = injector;
         return _this;
     }
@@ -68,7 +66,7 @@ var UserService = /** @class */ (function (_super) {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"]])
     ], UserService);
     return UserService;
-}(_shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_3__["BaseResourceService"]));
+}(_shared_services_base_resource_service__WEBPACK_IMPORTED_MODULE_2__["BaseResourceService"]));
 
 
 
